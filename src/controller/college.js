@@ -62,7 +62,9 @@ const createCollege = async function (req, res) {
 
 const getCollege = async function (req, res) {
     try {
+       
         let getData = req.query.collegeName;
+        if(!getData) return res.status(400).send({status:false,msg:"College name not present!"})
         
         let saveData = await collegeModel.findOne({name:getData});
         if(!saveData) return res.status(400).send({status:false,msg:"No college with this name found"})
